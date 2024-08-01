@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components/product-card";
-import { api } from "@/data/data";
+import { api } from "@/data/api";
 import { Product } from "@/data/types/product";
 import { Metadata } from "next";
 
