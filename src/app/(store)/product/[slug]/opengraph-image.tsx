@@ -1,4 +1,4 @@
-import { api } from "@/data/data"
+import { api } from "@/data/api"
 import { Product } from "@/data/types/product"
 import { env } from "@/env"
 import { ImageResponse } from "next/og"
