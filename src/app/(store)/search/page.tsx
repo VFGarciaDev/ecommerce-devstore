@@ -1,20 +1,51 @@
+import { ProductCard } from "@/components/product-card";
+import { api } from "@/data/api";
+import { Product } from "@/data/types/product";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function Search() {
+type SearchProps = {
+    searchParams: {
+        q: string
+    }
+}
+
+async function getSearchProducts(query: string): Promise<Product[]> {
+    const response = await api(`/products/search?q=${query}`, {
+        next: {
+            revalidate: 60 * 60, // 1 hour
+        },
+    })
+    const products = await response.json()
+    return products
+}
+
+export default async function Search({ searchParams }: SearchProps) {
+    const { q: query } = searchParams
+    if (!query) {
+        redirect('/')
+    }
+    const products = await getSearchProducts(query)
+    console.log(products)
 
     return (
         <div className="flex flex-col gap-4">
-            <p className="text-sm">Resultados para: <span className="font-semibold"></span></p>
+            <p className="text-sm">Resultados para: <span className="font-semibold">{query}</span></p>
 
             <div className="grid grid-cols-3 gap-6">
-                {/* <Link href={`/product/${slug}`} className="group relative bg-zinc-900 overflow-hidden">
-                    <Image src={""} width={480} height={480} quality={100} alt="" className="size-full group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute flex items-center gap-2 h-12 max-w-[280px] bg-black/60 border-2 border-zinc-500 rounded-full p-1 pl-4">
-                        <span className="text-sm truncate">{name}</span>
-                        <span className="h-full flex items-center justify-center text-nowrap px-4 bg-violet-500 rounded-full font-semibold">{value}</span>
-                    </div>
-                </Link> */}
+                {products.map(products => (
+                    <ProductCard
+                        slug={products.slug}
+                        image={products.image}
+                        name={products.title}
+                        value={products.price.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                        })} />
+                ))}
             </div>
         </div>
     )
