@@ -1,8 +1,6 @@
 import { ProductCard } from "@/components/product-card";
 import { api } from "@/data/api";
 import { Product } from "@/data/types/product";
-import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 type SearchProps = {
