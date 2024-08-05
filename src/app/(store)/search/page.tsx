@@ -20,6 +20,7 @@ async function getSearchProducts(query: string): Promise<Product[]> {
 }
 
 export default async function Search({ searchParams }: SearchProps) {
+    // props: { params: { slug: string }, searchParams: { q: string } }
     const { q: query } = searchParams
     if (!query) {
         redirect('/')
