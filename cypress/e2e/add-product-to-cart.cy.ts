@@ -26,9 +26,9 @@ describe('add product to cart', () => {
   })
 
   it('should be able to search for a product and add it to the cart', () => {
-    cy.visit('http://localhost:3000')
-
-    cy.get('input[name=q]').type('moletom').parent('form').submit()
+    // cy.visit('http://localhost:3000')
+    // cy.get('input[name=q]').type('moletom').parent('form').submit()
+    cy.searchByQuery('moletom') // cypress/suport/commands.ts
 
     cy.location('pathname').should('include', '/search')
 
