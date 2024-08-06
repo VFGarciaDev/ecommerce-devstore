@@ -37,7 +37,8 @@ export async function generateStaticParams() {
     return products.map(product => {
         return {
             slug: product.slug
-        }})
+        }
+    })
 }
 
 export default async function ProductPage({ params }: ProductProps) {
@@ -74,8 +75,8 @@ export default async function ProductPage({ params }: ProductProps) {
                 <section className="font-semibold">
                     <h2 className="text-lg">Tamanhos</h2>
                     <div className="flex gap-2 mt-4 list-none text-sm">
-                        {sizes.map(size => (
-                            <button className="py-3 px-6 bg-zinc-800 border-2 border-zinc-700 rounded-full hover:cursor-pointer hover:bg-emerald-500 transition-colors">{size}</button>
+                        {sizes.map((size, index) => (
+                            <button key={index} className="py-3 px-6 bg-zinc-800 border-2 border-zinc-700 rounded-full hover:cursor-pointer hover:bg-emerald-500 transition-colors">{size}</button>
                         ))}
                     </div>
                 </section>

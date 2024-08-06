@@ -33,8 +33,9 @@ export default async function Search({ searchParams }: SearchProps) {
             <p className="text-sm">Resultados para: <span className="font-semibold">{query}</span></p>
 
             <div className="grid grid-cols-3 gap-6">
-                {products.map(products => (
+                {products.map((products, index) => (
                     <ProductCard
+                        key={index}
                         slug={products.slug}
                         image={products.image}
                         name={products.title}

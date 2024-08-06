@@ -34,8 +34,9 @@ export default async function Home() {
             maximumFractionDigits: 0,
           })} />
 
-      {otherProducts.map(p =>
+      {otherProducts.map((p, index) =>
         <ProductCard
+          key={index}
           slug={p.slug}
           image={p.image}
           name={p.title}
